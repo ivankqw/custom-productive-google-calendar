@@ -45,9 +45,6 @@ function updateBackground(imageURL) {
   }); 
 }
 
-const BUTTON_HOLDER_CLASS = 'uW9umb';
-const TOP_BUTTONS_CLASS = 'd6McF';
-
 function createPomodoroButtonDOM() {
   let button = document.createElement('a');
   button.id = 'xtnBtn';
@@ -63,9 +60,7 @@ function createPomodoroButtonDOM() {
       </span>
     </span>
   `;
-
   button.addEventListener("click", startPomodoro);
-
   return button;
 }
 
@@ -81,7 +76,6 @@ function createPomodoroTimerDOM() {
       </span>
     </span>
   `;
-
   return timer;
 }
 
@@ -94,24 +88,27 @@ function showPomodoro() {
 }
 
 async function startPomodoro() {
-  pomoCount++;
-  if (confirm("Starting Pomodoro (25 Minutes) " + String(pomoCount) + " now!")) {
+  let countToLongBreak = 5 - pomoCount % 5 - 2;
+  let longBreakMessage = countToLongBreak != 0 ? countToLongBreak + " more Pomodoro(s) after current Pomodoro to Long Break!\n\n" : "Long Break next!"
+  let progressMessage = "You have completed " + pomoToHoursAndMinutes(pomoCount) + " of focus time so far, keep it up!\n\n";
+  if (confirm("Starting 25min Pomodoro " + String(pomoCount + 1) + " now!\n\n" + longBreakMessage + progressMessage)) {
     updateBackground(pomodoroImages[0]);
     //POMODORO: 25 minutes or 1500000 ms
-    //await new Promise(r => setTimeout(r, 10000));
-    //startTimer(10000);
-    await test(5000);
-    let endMessage = "Congratulations on your Pomodoro " + String(pomoCount) + " completion!"
+    await startTimer(pomodoroTime);
+    //only count pomodoro once finished
+    pomoCount++;
+    progressMessage = "You have completed " + pomoToHoursAndMinutes(pomoCount) + " of focus time so far, keep it up!\n\n";
+    let endMessage = "Pomodoro " + String(pomoCount) + " completed!\n\n"
     if (pomoCount % 5 == 0) {
       //take a long break
-      if (confirm(endMessage + " Take a Long Break? (15 Minutes)")) {
+      if (confirm(endMessage + progressMessage + " Take a 15min Long Break?")) {
         startLongBreak();
       } else {
         cancelPomo();
       }
     } else {
       //take a short break
-      if (confirm(endMessage + " Take a Short Break? (5 Minutes)")) {
+      if (confirm(endMessage + progressMessage + " Take a 5min Short Break?")) {
         startShortBreak();
       } else {
         cancelPomo();
@@ -123,39 +120,21 @@ async function startPomodoro() {
 }
 
 function convertMilliseconds(ms) {
-  // Create a new date object and set the time to the given number of milliseconds
-  var date = new Date(ms);
-  // Extract the minutes and seconds from the date object
-  var minutes = date.getMinutes();
-  var seconds = date.getSeconds();
+  // Extract the minutes and seconds 
+  var minutes = Math.floor(ms / 60000);
+  var seconds = ((ms % 60000) / 1000).toFixed(0);
   // Return the time as a string in the format "minutes:seconds"
-  return minutes + ":" + seconds;
+  return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
 
-//takes in time in milliseconds
-function startTimer(ms) {
-  // Initialize the countdown counter
-  let countdownCounter = ms;
-  // Get a reference to the countdown timer element on the page
-  const countdownTimer = document.getElementById("pomodoro-timer");
-  // Update the countdown timer every 1000 milliseconds (1 second)
-  setInterval(() => {
-    // Update the countdown timer element with the current time
-    countdownTimer.innerHTML = convertMilliseconds(countdownCounter);
-    // Decrement the countdown counter
-    countdownCounter -= 1000;
-    // If the countdown is finished, stop the timer and alert the user
-    if (countdownCounter < 0) {
-      clearInterval(countdownTimer);
-      console.log("Timer complete");
-      //alert('Countdown finished!');
-    }
-  }, 1000);
+function pomoToHoursAndMinutes(pomo) {
+  let minutes = pomo * 25;
+  let m = minutes % 60;
+  let h = Math.floor(minutes / 60);
+  return h + ' hours and ' + m + ' minutes';
 }
 
-//await new Promise(r => setTimeout(r, 10000));
-
-async function test(ms) {
+async function startTimer(ms) {
   let doRun = true; 
   // Initialize the countdown counter
   let countdownCounter = ms;
@@ -181,15 +160,15 @@ function cancelPomo() {
   updateBackground(defaultImage);
   //reset pomo counter
   pomoCount = 0;
+  //remove countdown timer
+  document.getElementById("pomodoro-timer").innerHTML = "";
 }
 
 async function startShortBreak() {
   console.log("short break now")
   updateBackground(pomodoroImages[1]);
   //SHORT BREAK: 5 minutes or 300000 ms
-  //await new Promise(r => setTimeout(r, 10000));
-  //startTimer(10000);
-  await test(5000);
+  await startTimer(shortBreakTime);
   startPomodoro();
 }
 
@@ -197,14 +176,17 @@ async function startLongBreak() {
   console.log("long break now")
   updateBackground(pomodoroImages[2]);
   //LONG BREAK: 15 minutes or 900000 ms
-  //await new Promise(r => setTimeout(r, 10000));
-  //startTimer(10000);
-  await test(5000);
+  await startTimer(longBreakTime);
   startPomodoro();
 }
+
+const pomodoroTime = 5000;
+const shortBreakTime = 5000;
+const longBreakTime = 5000;
+const BUTTON_HOLDER_CLASS = 'uW9umb';
+const TOP_BUTTONS_CLASS = 'd6McF';
+let pomoCount = 0;
 
 showImage();
 showPomodoro();
 updateBackground(defaultImage);
-//pomoCount refreshes when user refreshes google calendar page :/
-let pomoCount = 0
