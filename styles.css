@@ -83,3 +83,19 @@ body {
 .gboEAb {
   background-color: var(--transparent-0p5) !important;
 }
+
+.svg-icon {
+  width: 2em;
+  height: 2em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: #cf2c07;
+}
+
+.svg-icon circle {
+  stroke: #cf2c07;
+  stroke-width: 10;
+}
