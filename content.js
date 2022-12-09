@@ -86,14 +86,23 @@ async function startPomodoro() {
       //take a long break
       if (confirm(endMessage + " Take a Long Break? (15 Minutes)")) {
         startLongBreak();
+      } else {
+        cancelPomo();
       }
     } else {
       //take a short break
       if (confirm(endMessage + " Take a Short Break? (5 Minutes)")) {
         startShortBreak();
+      } else {
+        cancelPomo();
       }
     }
+  } else {
+    cancelPomo();
   } 
+}
+
+function cancelPomo() {
   console.log("Canceled Pomodoro");
   //change back to default bg
   updateBackground(defaultImage);
@@ -102,6 +111,7 @@ async function startPomodoro() {
 }
 
 async function startShortBreak() {
+  console.log("short break now")
   updateBackground(pomodoroImages[1]);
   //SHORT BREAK: 5 minutes or 300000 ms
   await new Promise(r => setTimeout(r, 10000));
@@ -109,6 +119,7 @@ async function startShortBreak() {
 }
 
 async function startLongBreak() {
+  console.log("long break now")
   updateBackground(pomodoroImages[2]);
   //LONG BREAK: 15 minutes or 900000 ms
   await new Promise(r => setTimeout(r, 10000));
