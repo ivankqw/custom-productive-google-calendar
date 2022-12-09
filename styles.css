@@ -1,0 +1,85 @@
+/* This is injected after a web page loads */
+
+body {
+  --transparent-0p0: rgba(255,255,255, 0.0);
+  --transparent-0p1: rgba(255,255,255, 0.1);
+  --transparent-0p3: rgba(255,255,255, 0.3);
+  --transparent-0p5: rgba(255,255,255, 0.5);
+  --transparent-0p8: rgba(255,255,255, 0.8);
+  --dark-0p0: rgba(  0,  0,  0, 0.0);
+  --dark-0p1: rgba(  0,  0,  0, 0.1);
+  --dark-0p3: rgba(  0,  0,  0, 0.3);
+  --dark-0p5: rgba(  0,  0,  0, 0.5);
+  --dark-0p8: rgba(  0,  0,  0, 0.8)
+}
+
+#imgDiv, #img, #imgOverlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#img {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+#imgOverlay {
+  background-color: var(--transparent-0p5);
+}
+
+/* grid */
+.t8qpF, /*month*/
+.PhLhOd, /*month*/ 
+.d3Ig7c {
+  border-right-color: var(--dark-0p1) !important;
+}
+
+.QIadxc, /*month*/
+.L1Ysrb, /*agenda*/
+.mmsF1c::after {
+  border-bottom-color: var(--dark-0p1) !important;
+}
+
+/* transparent bg */
+#gb,
+.yHbHub,
+.tNDBE,
+.v83gc,
+.GENA3c,
+.ALy9T,
+.OCQPo.YoVtqb.eh5oYe, /*day*/
+.Gk2izd /*timezone*/ {
+  border-left-color: var(--dark-0p1) !important;
+  background-color: transparent !important;
+}
+
+/*weekly*/
+.MANBAf {
+  color: black !important
+}
+
+/*agenda*/
+.dtaVuc,
+.OjpdXc {
+  color: black !important;
+}
+
+/*day picker*/
+.HkPXyb {
+  background-color: var(--transparent-0p1) !important;
+}
+
+.W0m3G .r4nke {
+  width: auto !important;
+  background-color: transparent !important;
+}
+
+/*sidebar*/
+.gboEAb {
+  background-color: var(--transparent-0p5) !important;
+}
