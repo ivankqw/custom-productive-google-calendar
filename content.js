@@ -69,10 +69,28 @@ function createPomodoroButtonDOM() {
   return button;
 }
 
-function showButtons() {
+function createPomodoroTimerDOM() {
+  let timer = document.createElement('div');
+  timer.id = 'pomodoro-timer';
+  timer.className = TOP_BUTTONS_CLASS;
+  timer.title = 'Background';
+
+  timer.innerHTML = `
+    <span class="xjKiLb">
+      <span class="Ce1Y1c" style="padding: 5px;">
+      </span>
+    </span>
+  `;
+
+  return timer;
+}
+
+function showPomodoro() {
   let addButton = document.querySelector('.' + BUTTON_HOLDER_CLASS);
   let pomodoroButton = createPomodoroButtonDOM();
+  let pomodoroTimer = createPomodoroTimerDOM();
   addButton.insertBefore(pomodoroButton, addButton.firstElementChild);
+  addButton.insertBefore(pomodoroTimer, addButton.firstElementChild);
 }
 
 async function startPomodoro() {
@@ -80,7 +98,9 @@ async function startPomodoro() {
   if (confirm("Starting Pomodoro (25 Minutes) " + String(pomoCount) + " now!")) {
     updateBackground(pomodoroImages[0]);
     //POMODORO: 25 minutes or 1500000 ms
-    await new Promise(r => setTimeout(r, 10000));
+    //await new Promise(r => setTimeout(r, 10000));
+    //startTimer(10000);
+    await test(5000);
     let endMessage = "Congratulations on your Pomodoro " + String(pomoCount) + " completion!"
     if (pomoCount % 5 == 0) {
       //take a long break
@@ -102,6 +122,59 @@ async function startPomodoro() {
   } 
 }
 
+function convertMilliseconds(ms) {
+  // Create a new date object and set the time to the given number of milliseconds
+  var date = new Date(ms);
+  // Extract the minutes and seconds from the date object
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  // Return the time as a string in the format "minutes:seconds"
+  return minutes + ":" + seconds;
+}
+
+//takes in time in milliseconds
+function startTimer(ms) {
+  // Initialize the countdown counter
+  let countdownCounter = ms;
+  // Get a reference to the countdown timer element on the page
+  const countdownTimer = document.getElementById("pomodoro-timer");
+  // Update the countdown timer every 1000 milliseconds (1 second)
+  setInterval(() => {
+    // Update the countdown timer element with the current time
+    countdownTimer.innerHTML = convertMilliseconds(countdownCounter);
+    // Decrement the countdown counter
+    countdownCounter -= 1000;
+    // If the countdown is finished, stop the timer and alert the user
+    if (countdownCounter < 0) {
+      clearInterval(countdownTimer);
+      console.log("Timer complete");
+      //alert('Countdown finished!');
+    }
+  }, 1000);
+}
+
+//await new Promise(r => setTimeout(r, 10000));
+
+async function test(ms) {
+  let doRun = true; 
+  // Initialize the countdown counter
+  let countdownCounter = ms;
+  // Get a reference to the countdown timer element on the page
+  const countdownTimer = document.getElementById("pomodoro-timer");
+  // Update the countdown timer every 1000 milliseconds (1 second)
+  while (doRun) {
+    countdownTimer.innerHTML = convertMilliseconds(countdownCounter);
+    await new Promise(r => setTimeout(r, 1000));
+    // Decrement the countdown counter
+    countdownCounter -= 1000;
+    if (countdownCounter < 0) {
+      doRun = false
+      console.log("Timer complete");
+      //alert('Countdown finished!');
+    }
+  }
+}
+
 function cancelPomo() {
   console.log("Canceled Pomodoro");
   //change back to default bg
@@ -114,7 +187,9 @@ async function startShortBreak() {
   console.log("short break now")
   updateBackground(pomodoroImages[1]);
   //SHORT BREAK: 5 minutes or 300000 ms
-  await new Promise(r => setTimeout(r, 10000));
+  //await new Promise(r => setTimeout(r, 10000));
+  //startTimer(10000);
+  await test(5000);
   startPomodoro();
 }
 
@@ -122,12 +197,14 @@ async function startLongBreak() {
   console.log("long break now")
   updateBackground(pomodoroImages[2]);
   //LONG BREAK: 15 minutes or 900000 ms
-  await new Promise(r => setTimeout(r, 10000));
+  //await new Promise(r => setTimeout(r, 10000));
+  //startTimer(10000);
+  await test(5000);
   startPomodoro();
 }
 
 showImage();
-showButtons();
+showPomodoro();
 updateBackground(defaultImage);
 //pomoCount refreshes when user refreshes google calendar page :/
 let pomoCount = 0
