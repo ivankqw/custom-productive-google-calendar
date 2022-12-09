@@ -1,21 +1,16 @@
 // This script injects an element at the top of the page.
-let pics = [
-  "https://drive.google.com/file/d/1rd0zfgML17-NaDpU0ZnSsKNkkwW16kHT/view?usp=share_link", 
-  "https://drive.google.com/file/d/1y2AUG11mYGhrcMXsxvlw6h160Adhdzjg/view?usp=share_link",
-]
+
+// set default background here 
+let defaultImage = "https://drive.google.com/file/d/1rd0zfgML17-NaDpU0ZnSsKNkkwW16kHT/view?usp=share_link"
+
+// map to correct link format  
+defaultImage = "https://drive.google.com/uc?export=view&id=" + defaultImage.split("/")[5] 
 
 let pomodoroImages = [
   "https://drive.google.com/file/d/1yxhLDGYwKv3Sa3DkwT6Rze3L8wDoNH-c/view?usp=share_link",
   "https://drive.google.com/file/d/1R0Xpa4yNWU-RpY372vp5xnf2Abkl-nyq/view?usp=share_link",
   "https://drive.google.com/file/d/18kSGZPwklQaavsiT_ct8QxMswDIbzrzJ/view?usp=share_link"
 ]
-
-let defaultWhite = "https://drive.google.com/uc?export=view&id=13zqjeOmtUSTx5_6TZycQ-tyXlI8paHe4"
-
-pics = pics.map((driveLink) => {
-  let id = driveLink.split("/")[5]
-  return "https://drive.google.com/uc?export=view&id=" + id 
-})
 
 pomodoroImages = pomodoroImages.map((driveLink) => {
   let id = driveLink.split("/")[5]
@@ -41,25 +36,20 @@ function showImage() {
   banner.parentElement.insertBefore(imageDOM, banner);
 }
 
-//TODO: implement normal mode
-// index of the current image
-let currentIndex = 0;
-
 function updateBackground(imageURL) {
   document.getElementById('img').style.backgroundImage = "url('" + imageURL + "')";
   document.addEventListener("visibilitychange", function() {
     if (document.visibilityState === 'visible') {
       document.getElementById('img').style.backgroundImage = "url('" + imageURL + "')";
     }
-  });  // increment the currentIndex
-  currentIndex = (currentIndex + 1) % pics.length;
+  }); 
 }
 
-var BUTTON_HOLDER_CLASS = 'uW9umb';
-var TOP_BUTTONS_CLASS = 'd6McF';
+const BUTTON_HOLDER_CLASS = 'uW9umb';
+const TOP_BUTTONS_CLASS = 'd6McF';
 
 function createPomodoroButtonDOM() {
-  var button = document.createElement('a');
+  let button = document.createElement('a');
   button.id = 'xtnBtn';
   button.className = TOP_BUTTONS_CLASS;
   button.title = 'Background';
@@ -76,14 +66,13 @@ function createPomodoroButtonDOM() {
 
   button.addEventListener("click", startPomodoro);
 
-  //TODO on click functionality
   return button;
 }
 
-function showButton() {
-  var addButton = document.querySelector('.' + BUTTON_HOLDER_CLASS);
-  var newButton = createPomodoroButtonDOM();
-  addButton.insertBefore(newButton, addButton.firstElementChild);
+function showButtons() {
+  let addButton = document.querySelector('.' + BUTTON_HOLDER_CLASS);
+  let pomodoroButton = createPomodoroButtonDOM();
+  addButton.insertBefore(pomodoroButton, addButton.firstElementChild);
 }
 
 async function startPomodoro() {
@@ -106,8 +95,8 @@ async function startPomodoro() {
     }
   } 
   console.log("Canceled Pomodoro");
-  //change back to default white bg
-  updateBackground(defaultWhite);
+  //change back to default bg
+  updateBackground(defaultImage);
   //reset pomo counter
   pomoCount = 0;
 }
@@ -127,12 +116,7 @@ async function startLongBreak() {
 }
 
 showImage();
-showButton();
-
-//Pomodoro Mode 
+showButtons();
+updateBackground(defaultImage);
 //pomoCount refreshes when user refreshes google calendar page :/
 let pomoCount = 0
-
-//Wellness Mode 
-//updateBackground();
-//setInterval(updateBackground, 20000);
