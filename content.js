@@ -1,21 +1,21 @@
 // This script injects an element at the top of the page.
 
 // set default background here 
-let defaultImage = "https://drive.google.com/file/d/1rd0zfgML17-NaDpU0ZnSsKNkkwW16kHT/view?usp=share_link"
+let defaultImage = "";
 
 // map to correct link format  
-defaultImage = "https://drive.google.com/uc?export=view&id=" + defaultImage.split("/")[5] 
+defaultImage = "https://drive.google.com/uc?export=view&id=" + defaultImage.split("/")[5]; 
 
 let pomodoroImages = [
   "https://drive.google.com/file/d/1yxhLDGYwKv3Sa3DkwT6Rze3L8wDoNH-c/view?usp=share_link",
   "https://drive.google.com/file/d/1R0Xpa4yNWU-RpY372vp5xnf2Abkl-nyq/view?usp=share_link",
   "https://drive.google.com/file/d/18kSGZPwklQaavsiT_ct8QxMswDIbzrzJ/view?usp=share_link"
-]
+];
 
 pomodoroImages = pomodoroImages.map((driveLink) => {
   let id = driveLink.split("/")[5]
   return "https://drive.google.com/uc?export=view&id=" + id 
-})
+});
 
 function createImageDOM() {
   let imgDiv = document.createElement('div');
@@ -96,8 +96,8 @@ async function startPomodoro() {
     //only count pomodoro once finished
     pomoCount++;
     progressMessage = "You have completed " + pomoToHoursAndMinutes(pomoCount) + " of focus time so far, keep it up!\n\n";
-    let endMessage = "Pomodoro " + String(pomoCount) + " completed!\n\n"
-    if (pomoCount % 5 == 0) {
+    let endMessage = "Pomodoro " + String(pomoCount) + " completed!\n\n";
+    if (pomoCount % 4 == 0) {
       //take a long break
       if (confirm(endMessage + progressMessage + " Take a 15min Long Break?")) {
         startLongBreak();

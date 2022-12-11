@@ -36,9 +36,9 @@ Click on the red clock icon on the top of the page to begin a 25 minute Pomodoro
 ### The Customizability Aspect 
 As much as I like the features in Google Calendar, I really do not like the way it looks right now - the permanent 'Light Mode' look. As a 'Dark Mode' person, having one of my screens emitting invasively glaring white light is painful and distracting.
 
-It is clear that Google Calendar needs more customizability,especially in terms of a more customizable background. 
+It is clear that Google Calendar needs more customizability in terms of its background.
 
-The benefits of a customizable background are immense. For example, I could set the background to something that is less 'Light Mode'. Others facing a similar issue as me, or simply want to have a fresh look on Google Calendar could also benefit with increased customizability in Google Calendar.
+If the background was customizable, I could set the background to something that is less 'Light Mode'. Additionally, others could be facing a similar issue as me, or could simply want a fresh look on their Google Calendars. Regardless, the benefits of a customizable Google Calendar background are immense. 
 
 ### The Productivity Aspect 
 Productivity tools like Google Calendar have been instrumental in helping me be on task and focus on the things that are important in life. 
