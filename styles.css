@@ -4,6 +4,7 @@ body {
   --transparent-0p0: rgba(255,255,255, 0.0);
   --transparent-0p1: rgba(255,255,255, 0.1);
   --transparent-0p3: rgba(255,255,255, 0.3);
+  --transparent-0p4: rgba(255,255,255, 0.4);
   --transparent-0p5: rgba(255,255,255, 0.5);
   --transparent-0p8: rgba(255,255,255, 0.8);
   --dark-0p0: rgba(  0,  0,  0, 0.0);
@@ -29,7 +30,7 @@ body {
 }
 
 #imgOverlay {
-  background-color: var(--transparent-0p5);
+  background-color: var(--transparent-0p4);
 }
 
 /* grid */

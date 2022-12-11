@@ -123,7 +123,7 @@ function convertMilliseconds(ms) {
   // Extract the minutes and seconds 
   var minutes = Math.floor(ms / 60000);
   var seconds = ((ms % 60000) / 1000).toFixed(0);
-  // Return the time as a string in the format "minutes:seconds"
+  // Return the time as a string in the format "mm:ss"
   return (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
 
@@ -140,16 +140,15 @@ async function startTimer(ms) {
   let countdownCounter = ms;
   // Get a reference to the countdown timer element on the page
   const countdownTimer = document.getElementById("pomodoro-timer");
-  // Update the countdown timer every 1000 milliseconds (1 second)
   while (doRun) {
     countdownTimer.innerHTML = convertMilliseconds(countdownCounter);
+    // Update the countdown timer every 1000 milliseconds (1 second)
     await new Promise(r => setTimeout(r, 1000));
     // Decrement the countdown counter
     countdownCounter -= 1000;
     if (countdownCounter < 0) {
       doRun = false
       console.log("Timer complete");
-      //alert('Countdown finished!');
     }
   }
 }
@@ -180,9 +179,9 @@ async function startLongBreak() {
   startPomodoro();
 }
 
-const pomodoroTime = 5000;
-const shortBreakTime = 5000;
-const longBreakTime = 5000;
+const pomodoroTime = 1500000;    //POMODORO: 25 minutes or 1500000 ms
+const shortBreakTime = 300000;  //SHORT BREAK: 5 minutes or 300000 ms
+const longBreakTime = 900000;   //LONG BREAK: 15 minutes or 900000 ms
 const BUTTON_HOLDER_CLASS = 'uW9umb';
 const TOP_BUTTONS_CLASS = 'd6McF';
 let pomoCount = 0;
