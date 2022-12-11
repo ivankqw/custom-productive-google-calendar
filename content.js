@@ -88,10 +88,8 @@ function showPomodoro() {
 }
 
 async function startPomodoro() {
-  let countToLongBreak = 5 - pomoCount % 5 - 2;
-  let longBreakMessage = countToLongBreak != 0 ? countToLongBreak + " more Pomodoro(s) after current Pomodoro to Long Break!\n\n" : "Long Break next!"
   let progressMessage = "You have completed " + pomoToHoursAndMinutes(pomoCount) + " of focus time so far, keep it up!\n\n";
-  if (confirm("Starting 25min Pomodoro " + String(pomoCount + 1) + " now!\n\n" + longBreakMessage + progressMessage)) {
+  if (confirm("Starting 25min Pomodoro " + String(pomoCount + 1) + " now!\n\n" + progressMessage)) {
     updateBackground(pomodoroImages[0]);
     //POMODORO: 25 minutes or 1500000 ms
     await startTimer(pomodoroTime);

@@ -1,8 +1,8 @@
-# custom-productive-google-calendar
+# super-google-calendar
 An Arc Browser Boost for Google Calendar.  
 
 ## What This is 
-This Arc Boost is aimed at students and those who need a means that allows them to customize their Gooogle Calendar and make it more productive than ever. - *whether it's for studying or running errands, Productive Google Calendar is there for you.* 
+This Arc Boost is aimed at students and those who need a means that allows them to customize their Gooogle Calendar and make it more productive than ever. - *whether it's for studying or running errands, Super Google Calendar is there for you.* 
 
 ## Key Features   
 🗓️ Customize your Google Calendar background with any image of your choice.
@@ -32,7 +32,7 @@ Click on the red clock icon on the top of the page to begin a 25 minute Pomodoro
 - After a 25 minute Pomodoro session, there is a 5 minute short break. 
 - After every 4 Pomorodo sessions, there is a 15 minute long break.
 
-## Why I Created Productive Google Calendar 
+## Why I Created Super Google Calendar 
 ### The Customizability Aspect 
 As much as I like the features in Google Calendar, I really do not like the way it looks right now - the permanent 'Light Mode' look. As a 'Dark Mode' person, having one of my screens emitting invasively glaring white light is painful and distracting.
 
@@ -49,7 +49,7 @@ The Pomodoro technique helps me overcome this problem. The 25 minute work sessio
 
 >Time-blocking + Focus sessions = Peak Productivity 🤯
 
-Therefore, I decided to take back my internet and supercharge my productivity, by creating a Productive Google Calendar that combines existing time-blocking features with focus session features. 
+Therefore, I decided to take back my internet and supercharge my productivity, by creating a Super Google Calendar that combines existing time-blocking features with focus session features. 
 
 
 
